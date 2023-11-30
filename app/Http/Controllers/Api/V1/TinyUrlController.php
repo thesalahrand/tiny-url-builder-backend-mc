@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\V1\StoreTinyUrlRequest;
 use App\Http\Requests\V1\UpdateTinyUrlRequest;
+use App\Http\Resources\V1\TinyUrlCollection;
 use App\Models\TinyUrl;
+use App\Http\Controllers\Controller;
+use App\Traits\HttpResponses;
 
 class TinyUrlController extends Controller
 {
+    use HttpResponses;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->success(new TinyUrlCollection(TinyUrl::where('user_id', auth()->id())->paginate()));
     }
 
     /**

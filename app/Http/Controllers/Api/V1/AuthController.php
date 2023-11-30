@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\LoginUserRequest;
 use App\Http\Requests\V1\StoreUserRequest;
+use App\Http\Resources\V1\UserResource;
 use App\Models\User;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,7 @@ class AuthController extends Controller
         $user = User::create($validated);
 
         return $this->success([
-            'user' => $user,
+            'user' => new UserResource($user),
             'token' => $user->createToken("API Token of {$user->first_name} {$user->last_name}")->plainTextToken
         ]);
     }
@@ -37,7 +38,7 @@ class AuthController extends Controller
         $user = User::where('email', $validated['email'])->first();
 
         return $this->success([
-            'user' => $user,
+            'user' => new UserResource($user),
             'token' => $user->createToken("API Token of {$user->first_name} {$user->last_name}")->plainTextToken
         ]);
     }

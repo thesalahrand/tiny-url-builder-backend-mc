@@ -15,17 +15,17 @@ use App\Http\Controllers\Api\V1\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// api/v1
-// Route::group(['prefix' => 'v1', 'namespace' => 'App\\Http\\Controllers\\Api\\V1'], function () {
-//     Route::post('invoices/bulk', [InvoiceController::class, 'bulk'])
-//     ;
-//     Route::apiResource('/customers', CustomerController::class);
-//     Route::apiResource('/invoices', InvoiceController::class);
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
 // });
 
-Route::post('/v1/register', [AuthController::class, 'register']);
-Route::post('/v1/login', [AuthController::class, 'login']);
+// api/v1
+Route::prefix('v1')->group(function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout']);
+    });
+});
+

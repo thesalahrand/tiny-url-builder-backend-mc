@@ -27,7 +27,7 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
-        Route::apiResource('/tiny_urls', TinyUrlController::class);
+        Route::apiResource('/tiny-urls', TinyUrlController::class);
     });
 });
 

@@ -32,11 +32,6 @@ class StoreUserRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        // $this->merge([
-        //     'first_name' => $this->firstName ?? null,
-        //     'last_name' => $this->lastName ?? null,
-        //     'password_confirmation' => $this->passwordConfirmation ?? null
-        // ]);
         $this->merge([
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,

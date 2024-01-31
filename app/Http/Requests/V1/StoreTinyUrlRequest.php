@@ -11,7 +11,7 @@ class StoreTinyUrlRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class StoreTinyUrlRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'full_url' => ['required', 'url'],
+            'custom_url' => ['nullable', 'min:6', 'max:20', 'alpha_num', 'unique:tiny_urls,tiny_url']
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'full_url' => $this->fullUrl,
+            'custom_url' => $this->customUrl,
+        ]);
     }
 }

@@ -19,8 +19,7 @@ class TinyUrlController extends Controller
      */
     public function index()
     {
-        $authId = 1;
-        return $this->success(new TinyUrlCollection(TinyUrl::where('user_id', 1)->paginate()));
+        return $this->success(new TinyUrlCollection(TinyUrl::where('user_id', auth()->id())->paginate()));
     }
 
     /**
@@ -30,7 +29,7 @@ class TinyUrlController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['user_id'] = 1; // it's explicitly set due to some issues
+        $validated['user_id'] = auth()->id();
 
         if (!is_null($validated['custom_url'])) {
             $validated['tiny_url'] = $validated['custom_url'];

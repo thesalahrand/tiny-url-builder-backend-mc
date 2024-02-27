@@ -19,7 +19,7 @@ class TinyUrlFactory extends Factory
     {
         return [
             'full_url' => fake()->url(),
-            'tiny_url' => fake()->regexify('[A-Za-z0-9-_]{' . fake()->numberBetween(6, 48) . '}'),
+            'tiny_url' => fake()->word() . '-' . fake()->word() . '-' . fake()->word(),
             'user_id' => User::factory()
         ];
     }

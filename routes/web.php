@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\TinyUrlController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/{tiny_url:tiny_url}', [TinyUrlController::class, 'redirect']);

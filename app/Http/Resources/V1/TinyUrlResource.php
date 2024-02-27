@@ -17,7 +17,7 @@ class TinyUrlResource extends JsonResource
         return [
             'id' => $this->id,
             'fullUrl' => $this->full_url,
-            'tinyUrl' => $this->tiny_url,
+            'tinyUrl' => config('app.url') . '/' . $this->tiny_url,
             'updatedAt' => $this->updated_at
         ];
     }

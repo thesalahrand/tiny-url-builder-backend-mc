@@ -32,7 +32,7 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         if (!auth()->attempt($validated)) {
-            return $this->error('', 401, 'Credentials do not match');
+            return $this->error(null, 401, 'Credentials do not match');
         }
 
         $user = User::where('email', $validated['email'])->first();
@@ -47,8 +47,6 @@ class AuthController extends Controller
     {
         auth()->user()->currentAccessToken()->delete();
 
-        return $this->success([
-            'message' => 'You have successfully been logged out'
-        ]);
+        return $this->success(null, 200, 'You have successfully been logged out');
     }
 }

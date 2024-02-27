@@ -3,14 +3,13 @@
 namespace App\Actions;
 
 use App\Models\TinyUrl;
-use Brick\Math\BigInteger;
 
 class GetUniqueTinyUrl
 {
     private const SLOT_STARTS_FROM = 100000000000;
     private const ALLOWED_CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    private function convertFromBase10To62(int $base10Number)
+    private function convertFromBase10To62(int $base10Number): string
     {
         $base62String = '';
 
@@ -23,10 +22,11 @@ class GetUniqueTinyUrl
         return $base62String;
     }
 
-    public function handle(): string
+    public function execute(): string
     {
         $lastInsertedTinyUrlId = TinyUrl::latest()?->first()?->id ?? 0;
+        $uniqueTinyUrlId = $lastInsertedTinyUrlId + self::SLOT_STARTS_FROM;
 
-        return $this->convertFromBase10To62(self::SLOT_STARTS_FROM + $lastInsertedTinyUrlId);
+        return $this->convertFromBase10To62($uniqueTinyUrlId);
     }
 }

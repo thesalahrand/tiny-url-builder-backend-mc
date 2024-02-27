@@ -13,9 +13,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(25)->hasTinyUrls(10)->create();
-        User::factory()->count(100)->hasTinyUrls(5)->create();
-        User::factory()->count(100)->hasTinyUrls(3)->create();
-        User::factory()->count(5)->create();
+        User::factory()->count(5)->hasTinyUrls(10)->create();
+        User::factory()->count(10)->hasTinyUrls(5)->create();
+        User::factory()->count(10)->hasTinyUrls(3)->create();
+        User::factory()->count(10)->create();
     }
 }

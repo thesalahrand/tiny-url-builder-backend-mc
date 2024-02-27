@@ -22,8 +22,8 @@ class StoreTinyUrlRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_url' => ['required', 'url'],
-            'custom_url' => ['nullable', 'min:6', 'max:20', 'alpha_num', 'unique:tiny_urls,tiny_url']
+            'full_url' => ['required', 'string', 'url'],
+            'custom_url' => ['nullable', 'string', 'min:6', 'max:48', 'regex:/^(?!-)(?!.*--)[a-zA-Z0-9-]+(?<!-)$/', 'unique:tiny_urls,tiny_url']
         ];
     }
 

@@ -20,7 +20,7 @@ class TinyUrlController extends Controller
      */
     public function index(): JsonResponse
     {
-        return $this->success(new TinyUrlCollection(TinyUrl::where('user_id', auth()->id())->latest()->paginate()));
+        return $this->success(new TinyUrlCollection(TinyUrl::where('user_id', auth()->id())->latest()->get()));
     }
 
     /**

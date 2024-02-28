@@ -41,6 +41,10 @@ class TinyUrlController extends Controller
      */
     public function destroy(TinyUrl $tinyUrl): JsonResponse
     {
+        if ($tinyUrl->user_id !== auth()->id()) {
+            return $this->error(null, 403, 'You\'re not authenticated to perform this action.');
+        }
+
         $tinyUrl->delete();
 
         return $this->success(new TinyUrlResource($tinyUrl), 200, 'The URL has been deleted successfully.');

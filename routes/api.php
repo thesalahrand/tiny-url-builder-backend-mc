@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\V1\TinyUrlController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\TinyUrlController;
+use App\Http\Controllers\ArtisanController;
+// use Illuminate\Support\Facades\Route;
+// use Illuminate\Http\Request;
 use App\Http\Controllers\Api\V1\AuthController;
 
 /*
